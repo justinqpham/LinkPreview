@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LinkPreview - Settings</title>
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        background: #f5f5f5;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .header h1 {
+        color: #007bff;
+        margin-bottom: 8px;
+      }
+
+      .header p {
+        color: #666;
+      }
+
+      .section {
+        background: white;
+        padding: 20px;
+        border-radius: 8px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      }
+
+      .section h2 {
+        margin-bottom: 16px;
+        color: #333;
+      }
+
+      .setting-group {
+        margin-bottom: 20px;
+      }
+
+      .setting-group:last-child {
+        margin-bottom: 0;
+      }
+
+      .setting-label {
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: block;
+        color: #333;
+      }
+
+      .setting-description {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 12px;
+      }
+
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+
+      .checkbox-group input[type="checkbox"] {
+        margin-right: 8px;
+      }
+
+      .range-group {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+
+      .range-group input[type="range"] {
+        flex: 1;
+      }
+
+      .range-value {
+        min-width: 50px;
+        font-weight: 600;
+        color: #007bff;
+      }
+
+      select {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .button-group {
+        display: flex;
+        gap: 12px;
+        margin-top: 20px;
+      }
+
+      button {
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+
+      .btn-primary {
+        background: #007bff;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #0056b3;
+      }
+
+      .btn-secondary {
+        background: #6c757d;
+        color: white;
+      }
+
+      .btn-secondary:hover {
+        background: #545b62;
+      }
+
+      .status-message {
+        padding: 12px;
+        border-radius: 4px;
+        margin-bottom: 20px;
+        text-align: center;
+        display: none;
+      }
+
+      .status-success {
+        background: #d4edda;
+        color: #155724;
+        border: 1px solid #c3e6cb;
+      }
+
+      .status-error {
+        background: #f8d7da;
+        color: #721c24;
+        border: 1px solid #f5c6cb;
+      }
+
+      textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 14px;
+        font-family: inherit;
+        min-height: 80px;
+        resize: vertical;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>LinkPreview</h1>
+        <p>Configure how link previews work on websites</p>
+      </div>
+
+      <div id="status-message" class="status-message"></div>
+
+      <div class="section">
+        <h2>Activation Triggers</h2>
+        <div class="setting-description">Choose how to activate link previews</div>
+        
+        <div class="setting-group">
+          <div class="checkbox-group">
+            <input type="radio" id="longHover" name="trigger" value="longHover">
+            <label for="longHover">Long Hover</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="radio" id="hardClick" name="trigger" value="hardClick">
+            <label for="hardClick">Hard Click</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="radio" id="altClick" name="trigger" value="altClick">
+            <label for="altClick">Alt + Click</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="radio" id="ctrlShiftClick" name="trigger" value="ctrlShiftClick">
+            <label for="ctrlShiftClick">Ctrl + Shift + Click</label>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Long Hover Time</div>
+          <div class="range-group">
+            <input type="range" id="longHoverTime" min="500" max="3000" step="100">
+            <span class="range-value" id="longHoverTimeValue">1000ms</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Appearance</h2>
+        
+        <div class="setting-group">
+          <label class="setting-label" for="theme">Theme</label>
+          <select id="theme">
+            <option value="light">Light</option>
+            <option value="dark">Dark</option>
+          </select>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Z-Index</div>
+          <div class="setting-description">Layer priority for previews (higher = more on top)</div>
+          <div class="range-group">
+            <input type="range" id="zIndex" min="1000" max="999999" step="1000">
+            <span class="range-value" id="zIndexValue">9999</span>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Overlay Opacity</div>
+          <div class="setting-description">Darkness of background overlay (0 = transparent, 1 = opaque)</div>
+          <div class="range-group">
+            <input type="range" id="overlayOpacity" min="0" max="1" step="0.1">
+            <span class="range-value" id="overlayOpacityValue">0.3</span>
+          </div>
+        </div>
+
+        <div class="setting-group">
+          <div class="setting-label">Overlay Blur</div>
+          <div class="setting-description">Blur amount for background content (in pixels)</div>
+          <div class="range-group">
+            <input type="range" id="overlayBlur" min="0" max="20" step="1">
+            <span class="range-value" id="overlayBlurValue">2px</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Behavior</h2>
+        
+        <div class="setting-group">
+          <div class="checkbox-group">
+            <input type="checkbox" id="highlighting">
+            <label for="highlighting">Highlight links on hover</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="closeOnOutsideClick">
+            <label for="closeOnOutsideClick">Close when clicking outside</label>
+          </div>
+          <div class="checkbox-group">
+            <input type="checkbox" id="closeOnScrollOver">
+            <label for="closeOnScrollOver">Close when scrolling</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <h2>Disabled Websites</h2>
+        <div class="setting-description">Enter website domains where LinkPreview should be disabled (one per line)</div>
+        <div class="setting-group">
+          <textarea id="disabledWebsites" placeholder="example.com&#10;another-site.org"></textarea>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button class="btn-primary" id="saveSettings">Save Settings</button>
+        <button class="btn-secondary" id="resetSettings">Reset to Defaults</button>
+      </div>
+    </div>
+
+    <script src="options.js"></script>
+  </body>
+</html>

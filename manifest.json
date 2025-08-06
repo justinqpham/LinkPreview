@@ -1,0 +1,36 @@
+{
+   "action": {
+   },
+   "background": {
+      "service_worker": "background.js"
+   },
+   "content_scripts": [ {
+      "all_frames": true,
+      "js": [ "content-scripts/content.js" ],
+      "matches": [ "\u003Call_urls>" ],
+      "run_at": "document_start"
+   } ],
+   "default_locale": "en",
+   "description": "__MSG_appDesc__",
+   "host_permissions": [ "*://*/*" ],
+   "icons": {
+      "16": "icon/icon.png",
+      "32": "icon/icon.png",
+      "48": "icon/icon.png",
+      "96": "icon/icon.png",
+      "128": "icon/icon.png"
+   },
+   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEArM6t/riGhdL1LJc3fZkzqDrcpBnYYKRAvdqThTdfQFzv3hwn1M0ax2/IKATKpzggttn433SviMYy8gKPpFKE6MwHor9EldQWBlmznJj9MuKulEESa6OSepajhqHCDjRwo950VmY13jKl8qeEmo9D7J9RS1Uq5BpXcaj1jHzuWPgCoXV3bcBpnZEMGsGjEZfoSVOCkuveedp54eImOd+LNGnRip/YxBY/0KO5bEH8MK9PQk55kyZQ8E/oBGPjTCu2NoiRTCaqXhY4rXgwf8iDQvCsMe+o1NpsV+BkB+i3OsBOfmQS6d88eIyKKLrDdtIZPkoNx8fj0f6VEuEurJZkAQIDAQAB",
+   "manifest_version": 3,
+   "name": "__MSG_appName__",
+   "options_ui": {
+      "page": "options.html"
+   },
+   "permissions": [ "declarativeNetRequest", "storage", "contextMenus" ],
+   "content_security_policy": {
+      "extension_pages": "script-src 'self'; object-src 'self';"
+   },
+   "update_url": "https://clients2.google.com/service/update2/crx",
+   "version": "0.5.8",
+   "web_accessible_resources": [ ]
+}
