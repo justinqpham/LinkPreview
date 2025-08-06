@@ -5,6 +5,8 @@ class LinkPreviewOptions {
   constructor() {
     console.log('LinkPreviewOptions constructor called');
     this.settings = null;
+    this.hasUnsavedChanges = false;
+    this.autoSaveTimeout = null;
     this.init();
   }
 
@@ -65,6 +67,16 @@ class LinkPreviewOptions {
       this.resetSettings();
     });
 
+    // Auto-save on focus loss from the entire page
+    window.addEventListener('blur', () => {
+      if (this.hasUnsavedChanges) {
+        console.log('Window lost focus with unsaved changes, auto-saving...');
+        this.saveSettings();
+      }
+    });
+
+    // Setup change detection for all form elements
+    this.setupAutoSave();
 
     // Range inputs
     const longHoverRange = document.getElementById('longHoverTime');
@@ -86,6 +98,54 @@ class LinkPreviewOptions {
     overlayBlurRange.addEventListener('input', (e) => {
       document.getElementById('overlayBlurValue').textContent = e.target.value + 'px';
     });
+  }
+
+  setupAutoSave() {
+    // Get all form elements that can be changed
+    const formElements = document.querySelectorAll('input, select, textarea');
+    
+    formElements.forEach(element => {
+      // Add change listeners for all form elements
+      const eventType = element.type === 'range' ? 'input' : 'change';
+      element.addEventListener(eventType, () => {
+        this.markAsChanged();
+      });
+
+      // Also listen for blur events on text inputs and textarea
+      if (element.tagName === 'TEXTAREA' || element.type === 'text') {
+        element.addEventListener('blur', () => {
+          if (this.hasUnsavedChanges) {
+            this.triggerAutoSave();
+          }
+        });
+      }
+    });
+  }
+
+  markAsChanged() {
+    this.hasUnsavedChanges = true;
+    console.log('Settings changed, will auto-save soon...');
+    
+    // Clear existing timeout
+    if (this.autoSaveTimeout) {
+      clearTimeout(this.autoSaveTimeout);
+    }
+    
+    // Set new timeout for auto-save (2 seconds after last change)
+    this.autoSaveTimeout = setTimeout(() => {
+      if (this.hasUnsavedChanges) {
+        console.log('Auto-saving due to timeout...');
+        this.saveSettings();
+      }
+    }, 2000);
+  }
+
+  triggerAutoSave() {
+    if (this.autoSaveTimeout) {
+      clearTimeout(this.autoSaveTimeout);
+    }
+    console.log('Triggering immediate auto-save...');
+    this.saveSettings();
   }
 
   updateUI() {
@@ -166,6 +226,7 @@ class LinkPreviewOptions {
 
       if (response && response.success) {
         this.settings = newSettings;
+        this.hasUnsavedChanges = false;
         this.showStatusMessage('Settings saved successfully!', 'success');
         // Close the options page after a brief delay
         setTimeout(() => {

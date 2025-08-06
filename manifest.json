@@ -31,6 +31,6 @@
       "extension_pages": "script-src 'self'; object-src 'self';"
    },
    "update_url": "https://clients2.google.com/service/update2/crx",
-   "version": "0.5.8",
+   "version": "1.0",
    "web_accessible_resources": [ ]
 }
