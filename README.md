@@ -259,7 +259,7 @@ This extension requires the following permissions:
 
 ```bash
 # Clone repository
-git clone https://github.com/yourusername/LinkPreview.git
+git clone https://github.com/justinqpham/LinkPreview.git
 cd LinkPreview
 
 # No build process required - pure vanilla JS
@@ -322,21 +322,19 @@ See [CHANGELOG.md](CHANGELOG.md) for version history and release notes.
 
 ## Support
 
-- **Issues**: [GitHub Issues](https://github.com/yourusername/LinkPreview/issues)
-- **Discussions**: [GitHub Discussions](https://github.com/yourusername/LinkPreview/discussions)
-- **Email**: support@linkpreview.extension
+- **Issues**: [GitHub Issues](https://github.com/justinqpham/LinkPreview/issues)
+- **Discussions**: [GitHub Discussions](https://github.com/justinqpham/LinkPreview/discussions)
+- **Email**: please don't email me
 
 ## Acknowledgments
 
-- Inspired by mobile link preview behavior
-- Built with the Chrome Extensions community
-- Thanks to all contributors and testers
+- I'd like to thank the Academy and that one extension who charges $9.99/month for doing something this trivial.  If I wasn't that annoyed at the time, I wouldn't have made this and open-sourced it to the world.
 
 ## Author
 
-**Your Name**
-- GitHub: [@yourusername](https://github.com/yourusername)
-- Website: [yourwebsite.com](https://yourwebsite.com)
+**Justin Q Pham**
+- GitHub: [@justinqpham](https://github.com/justinqpham)
+- Website: [justinqpham.com](https://justinqpham.com)
 
 ---
 

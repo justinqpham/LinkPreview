@@ -2,7 +2,10 @@
   "permissions": {
     "allow": [
       "Bash(rm:*)",
-      "Bash(mv:*)"
+      "Bash(mv:*)",
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\ndocs: Add comprehensive project documentation\n\nAdd professional documentation for the LinkPreview extension:\n- README.md with detailed feature descriptions and usage guide\n- CONTRIBUTING.md with contribution guidelines and coding standards\n- LICENSE file (MIT License)\n- CHANGELOG.md with version history and release notes\n- GitHub issue templates for bug reports and feature requests\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")",
+      "Bash(git push:*)"
     ],
     "deny": []
   }
